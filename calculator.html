@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calculator</title>
+</head>
+<body>
+    <h1><b>Hexidecimal Calculator!</b></h1>
+    <p>Would you like to convert from Decimal to Hexidecimal or from Hexidecimal to Decimal?</p>
+    <p>Please click below:</p>
+    <button onClick = "dhParse()">Decimal to Hexidecimal</button>
+    <br>
+    <br>
+    <button onClick = "hdParse()">Hexidecimal to Decimal</button>
+
+    <script>
+
+    function dhParse(){
+        var finalArray = [];
+        var userDeciInput = prompt("Please enter your decimal to be converted", "Decimal...");
+        document.write("Your decimal of " + userDeciInput + " has been converted to the Hexidecimal of: ")
+        var userDeci = parseInt(userDeciInput);
+
+
+        var tempNum = userDeci;
+        var tempRemainder;
+
+
+        while(tempNum > 0){
+            tempRemainder = tempNum % 16;
+            finalArray.push(tempRemainder);
+            tempNum = Math.floor(tempNum/16);
+        }
+        convertDH(finalArray);
+        
+
+    }
+    function convertDH(finalArray){
+        var tempArray = [];
+        var tempNum;
+
+        for(i = 0; i < finalArray.length ; i++ ){
+            tempNum = finalArray[i];
+            switch(tempNum){
+                case 10:
+                    tempArray.push("A");
+                    break;
+                case 11:
+                    tempArray.push("B");
+                    break;
+                case 12:
+                    tempArray.push("C");
+                    break;
+                case 13:
+                    tempArray.push("D");
+                    break;    
+                case 14:
+                    tempArray.push("E");
+                    break;
+                case 15:
+                    tempArray.push("F"); 
+                default:
+                    tempArray.push(tempNum);
+            }
+        }
+        tempArray.reverse();
+        for(i = 0; i < tempArray.length; i++){
+            document.write(tempArray[i]);
+        }
+    }
+
+    function hdParse(){
+        var finalArray = [];
+        var userHexiInput = prompt("Please enter your Hexidecimal to be converted", "Hexidecimal...");
+        userHexiInput = userHexiInput.toUpperCase();
+        document.write("Your Hexidecimal of " + userHexiInput + " has been converted to the Decimal of: ");
+        var finalArray = userHexiInput.split("");
+        convertHD(finalArray);
+    }
+
+    function convertHD(inputArray){
+        var numTotal = 0;
+        var tempArray = [];
+        var tempSymbol;
+        
+        for(i = 0; i < inputArray.length; i++){
+            tempSymbol = inputArray[i];
+          
+            switch(tempSymbol){
+                case "A": 
+                    tempArray.push(10);
+                    break;
+                case "B":
+                    tempArray.push(11);
+                    break;
+                case "C":
+                    tempArray.push(12);
+                    break;
+                case "D":
+                    tempArray.push(13);
+                    break;
+                case "E":
+                    tempArray.push(14);
+                    break;
+                case "F":
+                    tempArray.push(15);
+                    break;
+                default: 
+                    tempArray.push(tempSymbol);
+            }
+        }
+        tempArray.reverse();
+
+        for(i = 0; i < tempArray.length; i++){
+            numTotal += tempArray[i] * Math.pow(16,i);
+        }
+        document.write(numTotal);
+    }
+
+
+</script>
+</body>
+
+</body>
+</html>
